@@ -7,8 +7,7 @@ print("\n=== Testar rota /calculator/1 ===")
 
 # Corpo da requisição que será enviado em formato JSON
 payload = {
-    "valor1": 10,
-    "valor2": 5
+    "number": 10
 }
 
 try:
