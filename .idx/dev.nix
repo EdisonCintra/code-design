@@ -1,11 +1,12 @@
 { pkgs, ... }: {
   channel = "stable-24.05"; # ou "unstable"
 
-  # Pacotes que serão instalados no ambiente
   packages = [
     pkgs.python3
+    pkgs.python3Packages.pip
     pkgs.python3Packages.flask
     pkgs.python3Packages.requests
+    pkgs.python3Packages.pytest
   ];
 
   idx = {
@@ -16,7 +17,7 @@
           python -m venv .venv
           source .venv/bin/activate
           pip install --upgrade pip
-          pip install -r requirements.txt || true
+          pip install -r requirements.txt || true 
         '';
         default.openFiles = [ "README.md" "src/index.html" "main.py" ];
       };
