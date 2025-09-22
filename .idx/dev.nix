@@ -16,7 +16,6 @@
           python -m venv .venv
           source .venv/bin/activate
           pip install --upgrade pip
-          # ainda instala as libs extras que você colocar no requirements.txt
           pip install -r requirements.txt || true
         '';
         default.openFiles = [ "README.md" "src/index.html" "main.py" ];
