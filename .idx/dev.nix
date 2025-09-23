@@ -7,6 +7,8 @@
     pkgs.python3Packages.flask
     pkgs.python3Packages.requests
     pkgs.python3Packages.pytest
+    pkgs.python3Packages.numpy
+
   ];
 
   idx = {
