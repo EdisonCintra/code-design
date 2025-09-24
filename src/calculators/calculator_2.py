@@ -1,15 +1,18 @@
 from flask import request as FlaskRequest
 from typing import Dict, List
-from src.drivers.numpy_handler import NumpyHandler
+from src.drivers.interfaces.driver_handler_interface import DriverHandlerInterface
 
 class Calculator2:
 
+    def __init__(self, driver_handler : DriverHandlerInterface) -> None:
+        self.__driver__handler = driver_handler
+
     def calculate(self, request : FlaskRequest) -> Dict:
         body = request.json
-        print(body)
         input_data = self.__validate_body(body)
-        print(input_data)
-
+        calculated_number = self.__process_data(input_data)
+        formated_response = self.__format_response(calculated_number)
+        return formated_response
 
     def __validate_body(self, body : Dict) -> List[float]:
         if 'numbers' not in body:
@@ -18,6 +21,17 @@ class Calculator2:
         return input_data
 
     def __process_data(self, input_data : List[float]) -> float :
-        numpy_handler = NumpyHandler()
         first_process_result = [(num * 11) ** 0.95 for num in input_data]
-        result = numpy_handler.standard_derivation(first_process_result)
+        print()
+        print(first_process_result)
+        result = self.__driver__handler.standard_derivation(first_process_result)
+        print(result)
+        return 1/result
+
+    def __format_response(self, calculated_number : float) -> Dict:
+        return {
+            "data" : {
+                "Calculator" : 2,
+                "result" : float(round(calculated_number,2))           
+            }
+        }
